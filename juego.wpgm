@@ -1,0 +1,6 @@
+import inicio.*
+
+program Juego {
+	comienzo.config()
+	game.start()
+}
