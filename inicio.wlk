@@ -1,5 +1,5 @@
 import wollok.game.*
-
+import niveles.*
 object comienzo {
 	method config() {
 		game.title("Our Love Story: The Next Patch")
@@ -47,11 +47,8 @@ object pantallaInicio inherits Pantalla{
 
 	override method config(){
 		super()
-		game.addVisual(gatito)
 		keyboard.enter().onPressDo{ 
-			//nivel.configurarEscenarioHabitacion()
-			//self.configuracionAdicional()
-			game.say(gatito, "hola")
+			nivelHabitacion.config()
 		}
 		keyboard.e().onPressDo{ pantallaCreditos.config() }
 	}
@@ -78,9 +75,4 @@ object pantallaCreditos inherits Pantalla {
 		}
 	}
 
-}
-
-object gatito {
-	var property image = "criss.png"
-	var property position =  game.origin()
 }
