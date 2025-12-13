@@ -2,12 +2,12 @@ import niveles.*
 
 object cris {
   var property image = "crisCharacter.png"
-  var property position = game.origin()
-  var property previousPosition = game.origin()
+  var property position = game.at(11, 6)
+  var property previousPosition = game.at(11, 6)
   
   method initialize() {
     image = "crisCharacter.png"
-    position = game.at(10, 10)
+    position = game.at(11, 6)
     previousPosition = position
   }
   
