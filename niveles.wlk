@@ -3,7 +3,7 @@ import personajes.*
 import objetos.*
 import thinIce.*
 import nivelMercadoLibre.*
-
+import nivelTerraria.*
 class NivelBase {
   var property bloqueadores = []
   var property portales = []
@@ -233,4 +233,18 @@ object nivelComputadoraV2 inherits NivelComputadoraBase {
   override method configurarPortales() {
     self.agregarPortalEn(game.at(1, 9), nivelVisualStudio)
   }
+}
+
+object nivelComputadoraV3 inherits NivelComputadoraBase {
+    override method agregarFondo() {
+        game.addVisual(fondoComputadora)
+    }
+
+    override method configurarPortales() {
+        // Portal a Terraria
+        self.agregarPortalEn(game.at(1, 7), nivelTerraria)
+        
+        // Portal de salida a la Habitación
+        self.agregarPortalEn(game.at(14, 14), nivelHabitacion)
+    }
 }

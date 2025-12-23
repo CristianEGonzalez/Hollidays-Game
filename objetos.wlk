@@ -50,7 +50,7 @@ class TerminalDeploy inherits Interactuable {
         
         game.schedule(2000, {
             cartelMensaje.activo(false)
-            nivelComputadoraV2.config()
+            nivelComputadoraV3.config()
         })
     }
 }
