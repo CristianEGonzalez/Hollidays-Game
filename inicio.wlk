@@ -1,5 +1,6 @@
 import wollok.game.*
 import niveles.*
+import objetos.*
 object comienzo {
 	method config() {
 		game.title("Our Love Story: The Next Patch")
@@ -39,16 +40,15 @@ class Pantalla {
 }
 
 object pantallaInicio inherits Pantalla{
-
 	override method agregarFotograma(){
-		fotogramas.add("pantallaInicio1.png")
-		fotogramas.add("pantallaInicio2.png")
+		fotogramas.add("portada1.png")
+		fotogramas.add("portada2.png")
 	}
 
 	override method config(){
 		super()
 		keyboard.enter().onPressDo{ 
-			nivelHabitacion.config()
+			pantallaControles.config()
 		}
 		keyboard.e().onPressDo{ pantallaCreditos.config() }
 	}
@@ -59,6 +59,22 @@ object pantallaInicio inherits Pantalla{
 		//sonido.ejecutar(ambiente)
 	}
 */
+}
+
+object pantallaControles inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("pantallainstruccion.png")
+		fotogramas.add("pantallainstruccion.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{ 
+			nivelHabitacion.config()
+		}
+	}
+
 }
 
 object pantallaCreditos inherits Pantalla {
