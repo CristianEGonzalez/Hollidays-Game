@@ -66,13 +66,3 @@ object moverIzquierda inherits Mover {
 
   }
 }
-
-object ali {
-  var property image = "ali.png"
-  var property position = game.at(10, 8)
-}
-
-object gatito {
-  var property image = "gatito.png"
-  var property position = game.at(12, 10)
-}
