@@ -4,6 +4,8 @@ import objetos.*
 import thinIce.*
 import nivelMercadoLibre.*
 import nivelTerraria.*
+import nivelCroquetas.*
+import nivelMerienda.*
 class NivelBase {
   var property bloqueadores = []
   var property portales = []
@@ -94,6 +96,8 @@ class NivelBase {
     
     // Tecla E para interacciones
     keyboard.e().onPressDo({ self.procesarInteraccion() })
+
+    keyboard.b().onPressDo({ self.retroceder() })
   }
   
   method verificarColisiones() {
@@ -152,11 +156,23 @@ class NivelBase {
         ) }
     )
   }
+
+  method retroceder() {}
+
+  method cerrarDialogo() {
+    if (game.hasVisual(pantallaDialogo)) {
+        game.removeVisual(pantallaDialogo)
+    }
+  }
 }
 
 object nivelHabitacion inherits NivelBase {
   override method agregarFondo() {
     game.addVisual(fondoHabitacion)
+  }
+
+  override method retroceder() {
+        self.cerrarDialogo()
   }
   
   override method configurarBloqueadores() {
@@ -183,6 +199,81 @@ object nivelHabitacion inherits NivelBase {
     
     // Gatito (área 2x2)
     self.agregarAreaBloqueada(3, 4, 2, 3)
+
+    // Comida gato
+    self.agregarBloqueadorEn(game.at(0, 0))
+    self.agregarBloqueadorEn(game.at(1, 0))
+    self.agregarBloqueadorEn(game.at(2, 0))
+  }
+
+  override method configurarInteractuables() {
+    self.agregarInteractuable(ali)
+    self.agregarInteractuable(gatito)
+    self.agregarInteractuable(pizarron)
+
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(4,1), objetivo = gatito))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(5,2), objetivo = gatito))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = gatito))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(13, 8), objetivo = pizarron))
+  }
+  
+  override method configurarPortales() {
+    // Portales para cambiar al nivel de computadora
+    self.agregarPortalEn(game.at(0, 1), minijuegoCroquetas)
+    self.agregarPortalEn(game.at(1, 1), minijuegoCroquetas)
+  }
+}
+
+
+object nivelHabitacionV2 inherits NivelBase {
+  override method agregarFondo() {
+    game.addVisual(fondoHabitacionV2)
+  }
+
+  override method retroceder() {
+        self.cerrarDialogo()
+  }
+  
+  override method configurarBloqueadores() {
+    // Escritorio (parte superior)
+    self.agregarAreaBloqueada(0, 4, 8, 8) // Fila 8, columnas 0-4
+    
+    // Esquina del escritorio
+    self.agregarBloqueadorEn(game.at(5, 9))
+    self.agregarBloqueadorEn(game.at(6, 9))
+    
+    // Resto del escritorio
+    self.agregarAreaBloqueada(7, 12, 8, 8) // Fila 8, columnas 7-12
+    self.agregarAreaBloqueada(13, 15, 9, 9) // Fila 9, columnas 13-15
+    
+    // Cama
+    self.agregarAreaBloqueada(8, 15, 4, 4) // Columna 8-15, fila 4
+    self.agregarAreaBloqueada(8, 8, 0, 4) // Columna 8, filas 0-4
+    
+    // Ali/silla
+    self.agregarBloqueadorEn(game.at(0, 6))
+    self.agregarBloqueadorEn(game.at(1, 6))
+    self.agregarBloqueadorEn(game.at(2, 6))
+    self.agregarBloqueadorEn(game.at(2, 7))
+    
+    // Gatito (área 2x2)
+    self.agregarAreaBloqueada(3, 4, 2, 3)
+
+    // Comida gato
+    self.agregarBloqueadorEn(game.at(0, 0))
+    self.agregarBloqueadorEn(game.at(1, 0))
+    self.agregarBloqueadorEn(game.at(2, 0))
+  }
+
+  override method configurarInteractuables() {
+    self.agregarInteractuable(ali)
+    self.agregarInteractuable(gatito2)
+    self.agregarInteractuable(pizarron)
+
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(4,1), objetivo = gatito2))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(5,2), objetivo = gatito2))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = gatito2))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(13, 8), objetivo = pizarron))
   }
   
   override method configurarPortales() {
@@ -192,10 +283,22 @@ object nivelHabitacion inherits NivelBase {
   }
 }
 
+
+class InteractuableInvisible inherits Interactuable {
+    var property objetivo
+    override method image() = "transparente.png"
+    override method accion() { objetivo.accion() }
+}
+
 object fondoHabitacion {
-  var property image = "fondopersonajes.png"
+  var property image = "fondohabitacion.png"
   var property position = game.origin()
-} // Clase base para niveles con fondo de computadora
+}
+
+object fondoHabitacionV2 {
+  var property image = "fondohabitacionV2.png"
+  var property position = game.origin()
+}
 
 class NivelComputadoraBase inherits NivelBase {
   var property filaSuperiorBloqueada = 3
