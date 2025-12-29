@@ -37,8 +37,11 @@ object minijuegoCroquetas inherits NivelBase {
         cris.image("crispetit.png")
 
         self.crearPlato(3)
+        self.crearPlatoInvisible(4)
         self.crearPlato(7)
+        self.crearPlatoInvisible(8)
         self.crearPlato(11)
+        self.crearPlatoInvisible(12)
 
         game.onTick(velocidadCris, "movimientoCris", { self.moverCris() })
         game.onTick(2500, "lanzarGato", { self.lanzarGato() })
@@ -64,6 +67,12 @@ object minijuegoCroquetas inherits NivelBase {
 
     method crearPlato(x) {
         const p = new Plato(position = game.at(x, 0))
+        platosActivos.add(p)
+        game.addVisual(p)
+    }
+
+    method crearPlatoInvisible(x) {
+        const p = new PlatoInvisible(position = game.at(x, 0))
         platosActivos.add(p)
         game.addVisual(p)
     }
@@ -248,11 +257,16 @@ class GatoObstaculo {
 
 class Plato {
     var property position
-    method image() = "plato_croquetas.png"
+    method image() = "platocroquetas.png"
+}
+
+class PlatoInvisible {
+    var property position
+    method image() = "transparente.png"
 }
 
 object marcadorPuntos {
-    method position() = game.at(0, 14)
+    method position() = game.at(2, 15)
     method text() =
         "Logradas: " + minijuegoCroquetas.puntos() +
         "/8 | Perdidas: " + minijuegoCroquetas.perdidas() + "/8"
@@ -262,7 +276,7 @@ object marcadorPuntos {
 object cartelMensajeCroquetas {
     var property texto = ""
     var property activo = false
-    method position() = game.at(4, 8)
+    method position() = game.at(7, 15)
     method text() = if (activo) texto else ""
     method textColor() = "FFFF00"
 }
