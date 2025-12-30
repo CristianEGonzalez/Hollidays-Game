@@ -2,6 +2,7 @@ import wollok.game.*
 import niveles.*
 import objetos.*
 import nivelCroquetas.*
+import nivelMercadoLibre.*
 object comienzo {
 	method config() {
 		game.title("Our Love Story: The Next Patch")
@@ -48,7 +49,7 @@ object pantallaInicio inherits Pantalla{
 
 	override method config(){
 		super()
-		keyboard.enter().onPressDo{ 
+		keyboard.enter().onPressDo{
 			pantallaControles.config()
 		}
 	}
@@ -79,8 +80,8 @@ object pantallaControles inherits Pantalla {
 
 object pantallaInstruccionCroquetas inherits Pantalla {
 	override method agregarFotograma(){
-		fotogramas.add("pantallaInstruccionCroqueta.png")
-		fotogramas.add("pantallaInstruccionCroqueta.png")
+		fotogramas.add("instrucciongato.png")
+		fotogramas.add("instrucciongato.png")
 	}
 
 	override method config(){
@@ -91,4 +92,34 @@ object pantallaInstruccionCroquetas inherits Pantalla {
 		}
 	}
 
+}
+
+object pantallaInstruccionMercado inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("instruccionesmeli.png")
+		fotogramas.add("instruccionesmeli.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			nivelCaptcha1.config()
+		}
+	}
+}
+
+object pantallaCaptchaSuperado inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("pantallacaptchasuperado.png")
+		fotogramas.add("pantallacaptchasuperado.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			nivelComputadoraV2.config()
+		}
+	}
 }

@@ -2,14 +2,17 @@ import personajes.*
 
 class ThinIceSystem {
   var property posicionesAgua = []
+  // Guardamos los objetos AguaVisual en una lista enves de game.allVisuals() que es lento.
+  var property visualesAgua = []
   var property posicionInicial
   var property posicionMeta
-  var property areaJuego = [] // Todas las posiciones jugables
+  var property areaJuego = []
   var property juegoTerminado = false
   var property personajePerdio = false
   
   method inicializar() {
     posicionesAgua = []
+    visualesAgua = []
     juegoTerminado = false
     personajePerdio = false
   }
@@ -49,25 +52,21 @@ class ThinIceSystem {
       return false
     }
     
-    
     // Verificar si la nueva posición es jugable
     if (!self.esPosicionJugable(nuevaPosicion)) {
       return false
     }
     
-    
-    // Si cae en agua, pierde (excepto si es la posición inicial)
-    if (self.tieneAguaEn(nuevaPosicion) && (nuevaPosicion != posicionInicial)) {
+    // Si cae en agua, pierde
+    if (self.tieneAguaEn(nuevaPosicion)) {
       personajePerdio = true
       return false
     }
-    
     
     // Agregar agua en la posición anterior (excepto si es meta)
     if ((posicionAnterior != posicionMeta) && (!self.tieneAguaEn(
         posicionAnterior
       ))) self.agregarAgua(posicionAnterior)
-    
     
     // Verificar si llegó a la meta
     return if (nuevaPosicion == posicionMeta) self.verificarVictoria() else true
@@ -90,26 +89,18 @@ class ThinIceSystem {
   }
   
   method reiniciar() {
-    // Eliminar todas las imágenes de agua
-    const visualesAEliminar = []
-    posicionesAgua.forEach(
-      { posicion =>
-        const visualAgua = self.obtenerVisualAgua(posicion)
-        if (visualAgua != null) visualesAEliminar.add(visualAgua)
-      }
-    )
+    visualesAgua.forEach({ visual => game.removeVisual(visual) })
     
-    // Eliminar los visuales
-    visualesAEliminar.forEach({ visual => game.removeVisual(visual) })
-    
+    visualesAgua = []
     posicionesAgua = []
     juegoTerminado = false
-    personajePerdio = false // Volver personaje a posición inicial
+    personajePerdio = false
     cris.position(posicionInicial)
   }
   
   method actualizarVisual(posicion) {
     const agua = new AguaVisual(position = posicion)
+    visualesAgua.add(agua)
     game.addVisual(agua)
   }
   
