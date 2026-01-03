@@ -1,8 +1,11 @@
+import nivelVisualStudio.*
 import wollok.game.*
 import niveles.*
 import objetos.*
 import nivelCroquetas.*
 import nivelMercadoLibre.*
+import sonidos.*
+import nivelTerraria.*
 object comienzo {
 	method config() {
 		game.title("Our Love Story: The Next Patch")
@@ -50,6 +53,7 @@ object pantallaInicio inherits Pantalla{
 	override method config(){
 		super()
 		keyboard.enter().onPressDo{
+			sonido.ejecutar(creadorDeSonidos.gatoMiau())
 			pantallaControles.config()
 		}
 	}
@@ -71,7 +75,7 @@ object pantallaControles inherits Pantalla {
 	override method config(){
 		super()
 
-		keyboard.enter().onPressDo{ 
+		keyboard.enter().onPressDo{
 			nivelHabitacion.config()
 		}
 	}
@@ -122,4 +126,37 @@ object pantallaCaptchaSuperado inherits Pantalla {
 			nivelComputadoraV2.config()
 		}
 	}
+}
+
+
+object pantallaInstruccionVS inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("instruccionvs.png")
+		fotogramas.add("instruccionvs.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			nivelVisualStudio.config()
+		}
+	}
+
+}
+
+object pantallaInstruccionTerraria inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("instruccionterraria.png")
+		fotogramas.add("instruccionterraria.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			nivelTerraria.config()
+		}
+	}
+
 }

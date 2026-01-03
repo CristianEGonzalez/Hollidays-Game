@@ -7,6 +7,7 @@ import nivelTerraria.*
 import nivelCroquetas.*
 import nivelMerienda.*
 import inicio.*
+import sonidos.*
 class NivelBase {
   var property bloqueadores = []
   var property portales = []
@@ -23,6 +24,8 @@ class NivelBase {
     self.agregarElementosVisuales()
     
     self.configurarTeclado()
+
+    sonido.reproducirMusica(new Ambiente())
   }
   
   method agregarFondo() {
@@ -224,6 +227,23 @@ object nivelHabitacionV2 inherits NivelHabitacionBase {
 }
 }
 
+object nivelHabitacionV3 inherits NivelHabitacionBase {
+  override method elGatito() = gatito2
+  override method agregarFondo() {
+    game.addVisual(fondoHabitacionV2)
+    game.onTick(500, "animacionFondo", { fondoHabitacionV2.cambiarFotograma() })
+  }
+  override method configurarPortales() {
+    self.agregarPortalEn(game.at(5, 8), nivelComputadoraV3)
+    self.agregarPortalEn(game.at(6, 8), nivelComputadoraV3)
+  }
+  override method configurarInteractuables() {
+    super()
+    ali.cambiarDialogos(["dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"])
+}
+}
+
+
 
 class InteractuableInvisible inherits Interactuable {
     var property objetivo
@@ -237,8 +257,14 @@ object fondoHabitacion {
 }
 
 object fondoHabitacionV2 {
-  var property image = "fondohabitacionV2.png"
   var property position = game.origin()
+  var fotograma = false
+
+  method image() = if (fotograma) "fondohabitacionV2_2.png" else "fondohabitacionV2.png"
+
+  method cambiarFotograma() {
+    fotograma = !fotograma
+  }
 }
 
 class NivelComputadoraBase inherits NivelBase {
@@ -275,20 +301,25 @@ object nivelComputadoraV2 inherits NivelComputadoraBase {
   }
   
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(1, 9), nivelVisualStudio)
+    self.agregarPortalEn(game.at(1, 9), pantallaInstruccionVS)
   }
 }
 
 object nivelComputadoraV3 inherits NivelComputadoraBase {
     override method agregarFondo() {
-        game.addVisual(fondoComputadora)
+        game.addVisual(fondoComputadora3)
     }
 
     override method configurarPortales() {
         // Portal a Terraria
-        self.agregarPortalEn(game.at(1, 7), nivelTerraria)
+        self.agregarPortalEn(game.at(1, 7), pantallaInstruccionTerraria)
         
         // Portal de salida a la Habitación
-        self.agregarPortalEn(game.at(14, 14), nivelHabitacion)
+        self.agregarPortalEn(game.at(14, 13), nivelHabitacionV3)
     }
+}
+
+object fondoComputadora3 {
+    var property image = "fondocompusalida.png"
+    var property position = game.origin()
 }

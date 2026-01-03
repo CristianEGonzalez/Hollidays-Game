@@ -1,6 +1,7 @@
 import niveles.*
 import personajes.*
 import objetos.*
+import sonidos.*
 
 object minijuegoCroquetas inherits NivelBase {
     var property puntos = 0
@@ -134,6 +135,7 @@ object minijuegoCroquetas inherits NivelBase {
 
     method restar() {
         puntos = (puntos - 1).max(0)
+        sonido.ejecutar(creadorDeSonidos.gatoMiau())
     }
 
     method fallar() {
