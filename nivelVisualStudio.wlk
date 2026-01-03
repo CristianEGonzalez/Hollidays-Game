@@ -5,7 +5,7 @@ import objetos.*
 object nivelVisualStudio inherits NivelComputadoraBase {
     var property bugsCazados = 0
     var property tiempoRestante = 25
-    const bugsObjetivo = 10
+    const bugsObjetivo = 12
     var property juegoActivo = false
 
     override method agregarFondo() {
@@ -101,7 +101,7 @@ object nivelVisualStudio inherits NivelComputadoraBase {
 
 object marcadorByteland {
     method position() = game.at(1, 14)
-    method text() = "BUGS: " + nivelVisualStudio.bugsCazados() + " / " + 10 + " | TIEMPO: " + nivelVisualStudio.tiempoRestante()
+    method text() = "BUGS: " + nivelVisualStudio.bugsCazados() + " / " + 12 + " | TIEMPO: " + nivelVisualStudio.tiempoRestante()
     method textColor() = "FFFFFF"
 }
 
