@@ -6,6 +6,7 @@ import nivelCroquetas.*
 import nivelMercadoLibre.*
 import sonidos.*
 import nivelTerraria.*
+import nivelMerienda.*
 object comienzo {
 	method config() {
 		game.title("Our Love Story: The Next Patch")

@@ -234,8 +234,7 @@ object nivelHabitacionV3 inherits NivelHabitacionBase {
     game.onTick(500, "animacionFondo", { fondoHabitacionV2.cambiarFotograma() })
   }
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(5, 8), nivelComputadoraV3)
-    self.agregarPortalEn(game.at(6, 8), nivelComputadoraV3)
+    self.agregarPortalEn(game.at(15, 7), minijuegoPanqueques)
   }
   override method configurarInteractuables() {
     super()
