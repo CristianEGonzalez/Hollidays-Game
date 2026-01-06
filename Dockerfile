@@ -5,15 +5,15 @@ WORKDIR /app
 # Instalar curl
 RUN apt-get update && apt-get install -y curl
 
-# Descargar Wollok CLI
-RUN curl -L https://github.com/uqbar-project/wollok-cli/releases/latest/download/wollok-cli-linux -o wollok \
-    && chmod +x wollok
+# Descargar Wollok CLI (versión estable)
+RUN curl -fL https://github.com/uqbar-project/wollok-cli/releases/download/v2.6.0/wollok-cli-linux \
+    -o wollok && chmod +x wollok
 
 # Copiar el proyecto
 COPY . .
 
-# Puerto del Wollok Game
+# Puerto del juego
 EXPOSE 4200
 
-# Comando de arranque
+# Ejecutar el juego
 CMD ["./wollok", "juego.wpgm"]
