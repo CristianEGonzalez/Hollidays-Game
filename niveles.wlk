@@ -191,7 +191,7 @@ class NivelHabitacionBase inherits NivelBase {
     self.agregarBloqueadorEn(game.at(2, 0))
   }
 
-  method elGatito() 
+  method elGatito()
 
   override method configurarInteractuables() {
     self.agregarInteractuable(ali)
@@ -234,7 +234,7 @@ object nivelHabitacionV3 inherits NivelHabitacionBase {
     game.onTick(500, "animacionFondo", { fondoHabitacionV2.cambiarFotograma() })
   }
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(15, 7), minijuegoPanqueques)
+    self.agregarPortalEn(game.at(14, 6), pantallaInstruccionMerienda)
   }
   override method configurarInteractuables() {
     super()
@@ -242,7 +242,88 @@ object nivelHabitacionV3 inherits NivelHabitacionBase {
 }
 }
 
+object nivelHabitacionV4 inherits NivelBase {
+   override method agregarFondo() {
+    game.addVisual(fondowinpanqueque)
+    game.onTick(500, "animacionFondo", { fondowinpanqueque.cambiarFotograma() })
+  }
+  override method configurarPortales() {
+    self.agregarPortalEn(game.at(0, 0), nivelRuta)
+    self.agregarPortalEn(game.at(1, 0), nivelRuta)
+  }
 
+  override method retroceder() {
+        self.cerrarDialogo()
+    }
+
+  override method configurarInteractuables() {
+    self.agregarInteractuable(ali2)
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(3,3), objetivo = ali2))
+}
+
+    override method config() {
+        super()
+        cris.position(game.at(12, 5))
+    }
+
+    override method configurarBloqueadores() {
+        (0..11).forEach({ x => self.agregarBloqueadorEn(game.at(x, 4)) })
+        [13, 14, 15].forEach({ x => self.agregarBloqueadorEn(game.at(x, 4)) })
+
+        [10, 11, 13, 14, 15].forEach({ x => self.agregarBloqueadorEn(game.at(x, 5)) })
+
+        (10..15).forEach({ x => self.agregarBloqueadorEn(game.at(x, 6)) })
+    }
+}
+
+object fondowinpanqueque {
+  var property position = game.origin()
+  var fotograma = false
+
+  method image() = if (fotograma) "fondowinpanqueque.png" else "fondowinpanqueque2.png"
+
+  method cambiarFotograma() {
+    fotograma = !fotograma
+  }
+}
+
+object nivelRuta inherits NivelBase {
+  override method agregarFondo() {
+    game.addVisual(fondoRuta)
+  }
+  
+  override method configurarPortales() {
+    self.agregarPortalEn(game.at(14, 3), pantallaFin)
+    self.agregarPortalEn(game.at(14, 4), pantallaFin)
+    self.agregarPortalEn(game.at(14, 5), pantallaFin)
+    self.agregarPortalEn(game.at(14, 6), pantallaFin)
+    self.agregarPortalEn(game.at(14, 7), pantallaFin)
+
+    self.agregarPortalEn(game.at(15, 3), pantallaFin)
+    self.agregarPortalEn(game.at(15, 4), pantallaFin)
+    self.agregarPortalEn(game.at(15, 5), pantallaFin)
+    self.agregarPortalEn(game.at(15, 6), pantallaFin)
+    self.agregarPortalEn(game.at(15, 7), pantallaFin)
+
+  }
+
+  override method config() {
+      super()
+      cris.position(game.at(0, 5))
+      cris.image("auto.png")
+  }
+
+      override method configurarBloqueadores() {
+        (0..15).forEach({ x => self.agregarBloqueadorEn(game.at(x, 2)) })
+
+        (0..15).forEach({ x => self.agregarBloqueadorEn(game.at(x, 7)) })
+    }
+}
+
+object fondoRuta {
+  var property image = "fondoruta.png"
+  var property position = game.origin()
+}
 
 class InteractuableInvisible inherits Interactuable {
     var property objetivo

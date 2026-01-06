@@ -61,6 +61,8 @@ object gatito2 inherits PersonajeConDialogo(position = game.at(3, 1), dialogos =
 
 object ali inherits PersonajeConDialogo(position = game.at(1, 5), dialogos = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]) {}
 
+object ali2 inherits PersonajeConDialogo(position = game.at(2, 3), dialogos = ["dialogoalipanqueque.png"]) {}
+
 object pizarron inherits Interactuable(position = game.at(14, 8)) {
     var property pizarron = "pizarronzoom.png"
 

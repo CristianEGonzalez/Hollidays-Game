@@ -161,3 +161,36 @@ object pantallaInstruccionTerraria inherits Pantalla {
 	}
 
 }
+
+object pantallaInstruccionMerienda inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("instruccionespanqueques.png")
+		fotogramas.add("instruccionespanqueques.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			minijuegoPanqueques.config()
+		}
+	}
+
+}
+
+
+object pantallaFin inherits Pantalla {
+	override method agregarFotograma(){
+		fotogramas.add("pantallavictoria.png")
+		fotogramas.add("pantallavictoria2.png")
+	}
+
+	override method config(){
+		super()
+
+		keyboard.enter().onPressDo{
+			pantallaInicio.config()
+		}
+	}
+
+}

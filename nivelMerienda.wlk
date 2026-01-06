@@ -5,7 +5,7 @@ import objetos.*
 object minijuegoPanqueques inherits NivelComputadoraBase {
     var property faseActual = 1 // 1: Memoria, 2: Mezcla, 3: Cocción
     var property juegoActivo = false
-    var property tiempoRestante = 60
+    var property tiempoRestante = 70
     var property consultasReceta = 1 // Permitimos una consulta extra
     var property puedeInteractuar = true
     
@@ -28,7 +28,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
 
     // Variables Fase 3 (Cocción)
     var property panquequesListos = 0
-    const objetivoSartenes = 10
+    const objetivoSartenes = 12
     const sartenes = [
         new Sarten(position = game.at(3, 10), id = 1, tecla = "A"),
         new Sarten(position = game.at(7, 10), id = 2, tecla = "S"),
@@ -46,7 +46,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         juegoActivo = false // Empieza en false hasta que se oculte la receta
         faseActual = 1
         recetaUsuario = []
-        tiempoRestante = 60
+        tiempoRestante = 70
         panquequesListos = 0
         progresoMezcla = 0
         zonaObjetivoActual = 0
@@ -273,7 +273,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
             s.iniciar()
         })
         
-        self.mostrarCartel("¡Cocina 10 panqueques!")
+        self.mostrarCartel("¡Cocina 12 panqueques!")
     }
 
     method limpiarPantallaCoccion() {
@@ -290,7 +290,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
             
             if (s.estado() == 2) { // COCIDO
                 panquequesListos += 1
-                self.mostrarCartel("¡Perfecto! " + panquequesListos + "/10")
+                self.mostrarCartel("¡Perfecto! " + panquequesListos + "/12")
                 s.reiniciar()
                 if (panquequesListos >= objetivoSartenes) self.victoria()
             } else { // CRUDO (1) o QUEMADO (3)
@@ -315,7 +315,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         juegoActivo = false
         sartenes.forEach({ s => s.detener() })
         self.mostrarCartel("¡Panqueques listos para comer!")
-        game.schedule(2000, { nivelHabitacionV2.config() })
+        game.schedule(2000, { nivelHabitacionV4.config() })
     }
 
     method perder() {
@@ -395,8 +395,8 @@ object selectorMezcla {
 object marcadorGeneral {
     method text() = "TIEMPO: " + minijuegoPanqueques.tiempoRestante() +
                     " | FASE: " + minijuegoPanqueques.faseActual() +
-                    " | LISTOS: " + minijuegoPanqueques.panquequesListos() + "/10"
-    method position() = game.at(1, 14)
+                    " | LISTOS: " + minijuegoPanqueques.panquequesListos() + "/12"
+    method position() = game.at(2, 14)
     method textColor() = "FFFFFF"
 }
 
