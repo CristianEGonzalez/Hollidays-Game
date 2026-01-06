@@ -1,6 +1,7 @@
 import niveles.*
 import personajes.*
 import objetos.*
+import sonidos.*
 
 object nivelVisualStudio inherits NivelComputadoraBase {
     var property bugsCazados = 0
@@ -11,6 +12,8 @@ object nivelVisualStudio inherits NivelComputadoraBase {
     override method agregarFondo() {
         game.addVisual(fondoVSCode)
     }
+
+    override method musicaDeNivel() = "musica_vs.mp3"
 
     override method configurarPersonaje() {
         cris.position(game.at(8, 8))
@@ -68,6 +71,7 @@ object nivelVisualStudio inherits NivelComputadoraBase {
     }
 
     method cazarBug() {
+        sonido.ejecutar(creadorDeSonidos.bug())
         bugsCazados += 1
     }
 

@@ -50,6 +50,8 @@ object minijuegoCroquetas inherits NivelBase {
         self.configurarTeclado()
     }
 
+    override method musicaDeNivel() = "musica_gato.mp3"
+
     method moverCris() {
         if (juegoActivo) {
             if (direccionDerecha) {

@@ -51,10 +51,13 @@ object pantallaInicio inherits Pantalla{
 		fotogramas.add("portada2.png")
 	}
 
+	method musicaDeNivel() = "musica_intro.mp3"
+
 	override method config(){
 		super()
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 		keyboard.enter().onPressDo{
-			sonido.ejecutar(creadorDeSonidos.gatoMiau())
+			sonido.ejecutar(creadorDeSonidos.start())
 			pantallaControles.config()
 		}
 	}
@@ -73,10 +76,13 @@ object pantallaControles inherits Pantalla {
 		fotogramas.add("pantallainstruccion.png")
 	}
 
+	method musicaDeNivel() = "musica_intro.mp3"
+
 	override method config(){
 		super()
-
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 		keyboard.enter().onPressDo{
+			sonido.ejecutar(creadorDeSonidos.start())
 			nivelHabitacion.config()
 		}
 	}
@@ -89,9 +95,11 @@ object pantallaInstruccionCroquetas inherits Pantalla {
 		fotogramas.add("instrucciongato.png")
 	}
 
+	method musicaDeNivel() = "musica_gato.mp3"
+
 	override method config(){
 		super()
-
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 		keyboard.enter().onPressDo{
 			minijuegoCroquetas.config()
 		}
@@ -105,9 +113,11 @@ object pantallaInstruccionMercado inherits Pantalla {
 		fotogramas.add("instruccionesmeli.png")
 	}
 
+	method musicaDeNivel() = "musica_fondo_habitacion.mp3"
+
 	override method config(){
 		super()
-
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 		keyboard.enter().onPressDo{
 			nivelCaptcha1.config()
 		}
@@ -136,8 +146,11 @@ object pantallaInstruccionVS inherits Pantalla {
 		fotogramas.add("instruccionvs.png")
 	}
 
+	method musicaDeNivel() = "musica_vs.mp3"
+
 	override method config(){
 		super()
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 
 		keyboard.enter().onPressDo{
 			nivelVisualStudio.config()
@@ -152,8 +165,11 @@ object pantallaInstruccionTerraria inherits Pantalla {
 		fotogramas.add("instruccionterraria.png")
 	}
 
+	method musicaDeNivel() = "musica_terraria.mp3"
+
 	override method config(){
 		super()
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 
 		keyboard.enter().onPressDo{
 			nivelTerraria.config()
@@ -168,8 +184,11 @@ object pantallaInstruccionMerienda inherits Pantalla {
 		fotogramas.add("instruccionespanqueques.png")
 	}
 
+	method musicaDeNivel() = "musica_merienda.mp3"
+
 	override method config(){
 		super()
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 
 		keyboard.enter().onPressDo{
 			minijuegoPanqueques.config()
@@ -185,9 +204,13 @@ object pantallaFin inherits Pantalla {
 		fotogramas.add("pantallavictoria2.png")
 	}
 
+	method musicaDeNivel() = "musica_fondo.mp3"
+
 	override method config(){
 		super()
-
+		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
+		sonido.ejecutar(creadorDeSonidos.victoria())
+		
 		keyboard.enter().onPressDo{
 			pantallaInicio.config()
 		}

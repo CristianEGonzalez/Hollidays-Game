@@ -42,6 +42,8 @@ object nivelTerraria inherits NivelComputadoraBase {
         self.agregarAreaBloqueada(0, 15, 2, 2)
     }
 
+    override method musicaDeNivel() = "musica_terraria.mp3"
+
     method intentarDisparar() {
         if (juegoActivo and municion > 0) {
             municion -= 1

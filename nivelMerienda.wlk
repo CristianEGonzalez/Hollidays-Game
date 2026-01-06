@@ -72,6 +72,8 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         bloqueadores.clear()
     }
 
+    override method musicaDeNivel() = "musica_merienda.mp3"
+
     override method configurarTeclado() {
         keyboard.up().onPressDo({ if (faseActual == 1) moverArriba.mover() })
         keyboard.down().onPressDo({ if (faseActual == 1) moverAbajo.mover() })
@@ -193,6 +195,9 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         zonaObjetivoActual = 0
         selectorX = 0
         dirSelector = 0.2
+
+        cris.position(game.at(7, 7))
+        cris.image("transparente.png")
         
         self.limpiarPantallaGeneral() // Quita a Cris y demás objetos
         self.actualizarFondoMezcla()
@@ -264,6 +269,9 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
     method iniciarFase3() {
         faseActual = 3
         juegoActivo = true
+
+        cris.position(game.at(7, 7))
+        cris.image("transparente.png")
         
         self.limpiarPantallaGeneral()
         fondoCocinaPanqueques.image("fondosarten.png")

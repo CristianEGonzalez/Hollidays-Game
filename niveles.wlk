@@ -25,8 +25,10 @@ class NivelBase {
     
     self.configurarTeclado()
 
-    sonido.reproducirMusica(new Ambiente())
+    sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
   }
+
+  method musicaDeNivel() = "musica_intro.mp3"
   
   method agregarFondo() {
     
@@ -203,6 +205,8 @@ class NivelHabitacionBase inherits NivelBase {
     self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = self.elGatito()))
     self.agregarInteractuable(new InteractuableInvisible(position = game.at(13, 8), objetivo = pizarron))
   }
+
+  override method musicaDeNivel() = "musica_fondo.mp3"
 }
 
 object nivelHabitacion inherits NivelHabitacionBase {
@@ -251,6 +255,8 @@ object nivelHabitacionV4 inherits NivelBase {
     self.agregarPortalEn(game.at(0, 0), nivelRuta)
     self.agregarPortalEn(game.at(1, 0), nivelRuta)
   }
+
+  override method musicaDeNivel() = "musica_fondo.mp3"
 
   override method retroceder() {
         self.cerrarDialogo()
@@ -318,6 +324,8 @@ object nivelRuta inherits NivelBase {
 
         (0..15).forEach({ x => self.agregarBloqueadorEn(game.at(x, 7)) })
     }
+
+  override method musicaDeNivel() = "musica_fondo.mp3"
 }
 
 object fondoRuta {
@@ -358,6 +366,8 @@ class NivelComputadoraBase inherits NivelBase {
   override method configurarBloqueadores() {
     self.agregarFilaBloqueadora(filaSuperiorBloqueada)
   }
+
+  override method musicaDeNivel() = "musica_fondo.mp3"
 }
 
 object nivelComputadora inherits NivelComputadoraBase {

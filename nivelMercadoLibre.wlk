@@ -14,6 +14,8 @@ object nivelMercadoLibre inherits NivelComputadoraBase {
     self.agregarPortalEn(game.at(4, 7), pantallaInstruccionMercado)
     self.agregarPortalEn(game.at(5, 7), pantallaInstruccionMercado)
   }
+
+  override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
 }
 
 object nivelMercadoLibre2 inherits NivelComputadoraBase {
@@ -27,6 +29,8 @@ object nivelMercadoLibre2 inherits NivelComputadoraBase {
     self.agregarPortalEn(game.at(8, 7), nivelCaptcha2)
     self.agregarPortalEn(game.at(9, 7), nivelCaptcha2)
   }
+
+  override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
 }
 
 object nivelMercadoLibre3 inherits NivelComputadoraBase {
@@ -39,6 +43,8 @@ object nivelMercadoLibre3 inherits NivelComputadoraBase {
     self.agregarPortalEn(game.at(11, 7), nivelCaptcha3)
     self.agregarPortalEn(game.at(12, 7), nivelCaptcha3)
   }
+
+  override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
 }
 
 object mercadoLibre1 {
@@ -62,6 +68,8 @@ class NivelCaptchaBase inherits NivelComputadoraBase {
   var property posInicio = null
   var property areaJuego = []
   var property siguienteNivel = null
+
+  override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
 
   override method agregarFondo() {
     game.addVisual(fondo)

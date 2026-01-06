@@ -1,4 +1,5 @@
 import personajes.*
+import sonidos.*
 
 class ThinIceSystem {
   var property posicionesAgua = []
@@ -15,7 +16,10 @@ class ThinIceSystem {
     visualesAgua = []
     juegoTerminado = false
     personajePerdio = false
+    sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
   }
+
+  method musicaDeNivel() = "musica_fondo_habitacion.mp3"
   
   method configurarAreaJuego(coordenadas) {
     areaJuego = []
