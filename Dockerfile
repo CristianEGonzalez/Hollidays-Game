@@ -2,18 +2,17 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Instalar curl
-RUN apt-get update && apt-get install -y curl
+# Instalar git y bash
+RUN apt-get update && apt-get install -y git bash
 
-# Descargar Wollok CLI (versión estable)
-RUN curl -fL https://github.com/uqbar-project/wollok-cli/releases/download/v2.6.0/wollok-cli-linux \
-    -o wollok && chmod +x wollok
-
-# Copiar el proyecto
+# Copiar tu juego
 COPY . .
 
-# Puerto del juego
-EXPOSE 4200
+# Clonar wollok-cli
+RUN git clone https://github.com/uqbar-project/wollok-cli
 
-# Ejecutar el juego
-CMD ["./wollok", "juego.wpgm"]
+# Agregar wollok-cli al PATH
+ENV PATH="/app/wollok-cli:${PATH}"
+
+# Render exige un proceso "web", dejamos el juego corriendo
+CMD wollok run
