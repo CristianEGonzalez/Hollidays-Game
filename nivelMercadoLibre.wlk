@@ -3,10 +3,11 @@ import niveles.*
 import personajes.*
 import objetos.*
 import thinIce.*
+import fondos.*
 
 object nivelMercadoLibre inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(mercadoLibre1)
+    game.addVisual(new Fondo(image="mercadolibre1.png"))
   }
   
   override method configurarPortales() {
@@ -20,7 +21,7 @@ object nivelMercadoLibre inherits NivelComputadoraBase {
 
 object nivelMercadoLibre2 inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(mercadoLibre2)
+    game.addVisual(new Fondo(image="mercadolibre1.png"))
   }
   
   override method configurarPortales() {
@@ -35,7 +36,7 @@ object nivelMercadoLibre2 inherits NivelComputadoraBase {
 
 object nivelMercadoLibre3 inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(mercadoLibre3)
+    game.addVisual(new Fondo(image="mercadolibre3.png"))
   }
   
   override method configurarPortales() {
@@ -45,21 +46,6 @@ object nivelMercadoLibre3 inherits NivelComputadoraBase {
   }
 
   override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
-}
-
-object mercadoLibre1 {
-  var property image = "mercadolibre1.png"
-  var property position = game.origin()
-}
-
-object mercadoLibre2 {
-  var property image = "mercadolibre2.png"
-  var property position = game.origin()
-}
-
-object mercadoLibre3 {
-  var property image = "mercadolibre3.png"
-  var property position = game.origin()
 }
 
 class NivelCaptchaBase inherits NivelComputadoraBase {
