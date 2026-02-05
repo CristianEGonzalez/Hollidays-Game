@@ -15,7 +15,6 @@ class Portal {
 }
 
 class Interactuable {
-    var property image = "transparente.png"
     var property position
     var property activo = true
     
@@ -118,7 +117,7 @@ object pizarron inherits Interactuable(position = game.at(14, 8)) {
 
 class BugCazable inherits Interactuable {
     var property nivel
-    override method image() = "bug.png"
+    method image() = "bug.png"
 
     override method accion() {
         if (nivel.juegoActivo()) {
@@ -130,7 +129,7 @@ class BugCazable inherits Interactuable {
 }
 
 class TerminalDeploy inherits Interactuable {
-    override method image() = "terminal.png"
+    method image() = "terminal.png"
 
     override method accion() {
         cartelMensaje.texto("DEPLOY EXITOSO! VOLVIENDO...")

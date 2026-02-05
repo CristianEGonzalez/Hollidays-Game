@@ -66,7 +66,7 @@ class NivelBase {
     
     // Agregar interactuables visibles
     interactuables.forEach(
-      { i => if (i.image() != "transparente.png") game.addVisual(i) }
+      { i => game.addVisual(i) }
     )
   }
   
@@ -334,7 +334,6 @@ object fondoRuta {
 
 class InteractuableInvisible inherits Interactuable {
     var property objetivo
-    override method image() = "transparente.png"
     override method accion() { objetivo.accion() }
 }
 
