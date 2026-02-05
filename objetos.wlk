@@ -16,9 +16,12 @@ class Portal {
 
 class Interactuable {
     var property position
+    var property posicionesInteractuables = [self.position()]
     var property activo = true
     
     method puedeInteractuar() = activo
+
+    method enAreaDeInteraccion() = self.posicionesInteractuables().contains(cris.position())
     
     method accion() {
         // Método a sobrescribir por cada interactuable específico
@@ -53,9 +56,14 @@ class PersonajeConDialogo inherits Interactuable {
     }
 }
 
-object gatito inherits PersonajeConDialogo(position = game.at(3, 1), dialogos = ["gatitodialogo1.png", "gatitodialogo.png"]) {
+object gatito inherits PersonajeConDialogo(
+    position = game.at(3, 1),
+    dialogos = ["gatitodialogo1.png", "gatitodialogo.png"]) {
+
     var property dormido = false
     const dialogosDormido = ["dialogogatito.png", "dialogogatito2.png", "dialogogatito3.png"]
+
+    override method posicionesInteractuables() = super() + [game.at(4,1), game.at(5,2), game.at(2,2)]
     
     method obtenerDialogosActuales() {
         return if (dormido) 
@@ -91,21 +99,25 @@ object gatito inherits PersonajeConDialogo(position = game.at(3, 1), dialogos = 
 
 object ali inherits PersonajeConDialogo(position = game.at(1, 5), dialogos = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]) {
     const dialogosHabitacionNormal = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]
-    const dialogosDesayuno = ["dialogoalipanqueque.png"]
+    const dialogosMerienda = ["dialogoalipanqueque.png"]
     
     method configurarHabitacionNormal() {
         position = game.at(1, 5)
         self.cambiarDialogos(dialogosHabitacionNormal)
+        posicionesInteractuables = [self.position(), game.at(2,5), game.at(3,6)]
     }
     
     method configurarDesayuno() {
         position = game.at(2, 3)
-        self.cambiarDialogos(dialogosDesayuno)
+        self.cambiarDialogos(dialogosMerienda)
+        posicionesInteractuables = [self.position(), game.at(3,3)]
     }
 }
 
 object pizarron inherits Interactuable(position = game.at(14, 8)) {
     var property pizarron = "pizarronzoom.png"
+
+    override method posicionesInteractuables() = super() + [game.at(13, 8)]
 
     override method accion() {
         if (!game.hasVisual(pantallaDialogo)) {

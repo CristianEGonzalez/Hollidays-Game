@@ -328,7 +328,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
 // --- CLASES ---
 class Ingrediente inherits Interactuable {
     var property nombre
-    override method image() = nombre.toLowerCase() + ".png"
+    method image() = nombre.toLowerCase() + ".png"
     override method accion() { minijuegoPanqueques.agregarIngrediente(nombre) }
 }
 

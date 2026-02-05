@@ -120,13 +120,12 @@ class NivelBase {
       )
       
       // Verificar interactuables
-      interactuables.forEach(
-        { interactuable => if (cris.compartePosicion(
-                               interactuable
-                             ) && interactuable.puedeInteractuar())
-                             interactuable.accion() }
-      )
+      if (interactuables.any({i => i.enAreaDeInteraccion()})) {
+        const interactuableCerca = interactuables.find({i => i.enAreaDeInteraccion()})
+        if (interactuableCerca.puedeInteractuar()) interactuableCerca.accion()
+      }
     }
+
   }
   
   method agregarBloqueador(bloqueador) {
@@ -200,11 +199,6 @@ class NivelHabitacionBase inherits NivelBase {
     self.agregarInteractuable(ali)
     self.agregarInteractuable(gatito)
     self.agregarInteractuable(pizarron)
-    
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(4,1), objetivo = gatito))
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(5,2), objetivo = gatito))
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = gatito))
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(13, 8), objetivo = pizarron))
   }
 
   override method musicaDeNivel() = "musica_fondo.mp3"
@@ -263,7 +257,6 @@ object nivelHabitacionV4 inherits NivelBase {
   override method configurarInteractuables() {
     ali.configurarDesayuno()
     self.agregarInteractuable(ali)
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(3,3), objetivo = ali))
   }
 
     override method config() {
@@ -330,11 +323,6 @@ object nivelRuta inherits NivelBase {
 object fondoRuta {
   var property image = "fondoruta.png"
   var property position = game.origin()
-}
-
-class InteractuableInvisible inherits Interactuable {
-    var property objetivo
-    override method accion() { objetivo.accion() }
 }
 
 object fondoHabitacion {

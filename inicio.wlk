@@ -61,13 +61,7 @@ object pantallaInicio inherits Pantalla{
 			pantallaControles.config()
 		}
 	}
-/*
-	override method configuracionAdicional(){
-		//const ambiente = new Ambiente()
-		nivel.nivelActual().config()
-		//sonido.ejecutar(ambiente)
-	}
-*/
+
 }
 
 object pantallaControles inherits Pantalla {
@@ -83,7 +77,7 @@ object pantallaControles inherits Pantalla {
 		sonido.reproducirMusica(new Ambiente(rutaArchivo = self.musicaDeNivel()))
 		keyboard.enter().onPressDo{
 			sonido.ejecutar(creadorDeSonidos.start())
-			nivelHabitacion.config()
+			nivelHabitacion.config() //ACA CONFIGURO EL NIVEL EN EL QUE COMIENZO!!
 		}
 	}
 
