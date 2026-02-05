@@ -193,16 +193,15 @@ class NivelHabitacionBase inherits NivelBase {
     self.agregarBloqueadorEn(game.at(2, 0))
   }
 
-  method elGatito()
-
   override method configurarInteractuables() {
+    ali.configurarHabitacionNormal()
     self.agregarInteractuable(ali)
-    self.agregarInteractuable(self.elGatito())
+    self.agregarInteractuable(gatito)
     self.agregarInteractuable(pizarron)
     
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(4,1), objetivo = self.elGatito()))
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(5,2), objetivo = self.elGatito()))
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = self.elGatito()))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(4,1), objetivo = gatito))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(5,2), objetivo = gatito))
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(2,2), objetivo = gatito))
     self.agregarInteractuable(new InteractuableInvisible(position = game.at(13, 8), objetivo = pizarron))
   }
 
@@ -210,7 +209,6 @@ class NivelHabitacionBase inherits NivelBase {
 }
 
 object nivelHabitacion inherits NivelHabitacionBase {
-  override method elGatito() = gatito
   override method agregarFondo() { game.addVisual(fondoHabitacion) }
   override method configurarPortales() {
     self.agregarPortalEn(game.at(0, 1), pantallaInstruccionCroquetas)
@@ -219,7 +217,6 @@ object nivelHabitacion inherits NivelHabitacionBase {
 }
 
 object nivelHabitacionV2 inherits NivelHabitacionBase {
-  override method elGatito() = gatito2
   override method agregarFondo() { game.addVisual(fondoHabitacionV2) }
   override method configurarPortales() {
     self.agregarPortalEn(game.at(5, 8), nivelComputadora)
@@ -232,7 +229,6 @@ object nivelHabitacionV2 inherits NivelHabitacionBase {
 }
 
 object nivelHabitacionV3 inherits NivelHabitacionBase {
-  override method elGatito() = gatito2
   override method agregarFondo() {
     game.addVisual(fondoHabitacionV2)
     game.onTick(500, "animacionFondo", { fondoHabitacionV2.cambiarFotograma() })
@@ -263,9 +259,10 @@ object nivelHabitacionV4 inherits NivelBase {
     }
 
   override method configurarInteractuables() {
-    self.agregarInteractuable(ali2)
-    self.agregarInteractuable(new InteractuableInvisible(position = game.at(3,3), objetivo = ali2))
-}
+    ali.configurarDesayuno()
+    self.agregarInteractuable(ali)
+    self.agregarInteractuable(new InteractuableInvisible(position = game.at(3,3), objetivo = ali))
+  }
 
     override method config() {
         super()

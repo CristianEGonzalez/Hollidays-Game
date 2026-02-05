@@ -141,6 +141,7 @@ object minijuegoCroquetas inherits NivelBase {
         self.detenerEventos()
         cartelMensajeCroquetas.texto("¡PLATOS LLENOS! VOLVIENDO...")
         cartelMensajeCroquetas.activo(true)
+        gatito.dormir()
         game.schedule(2000, { nivelHabitacionV2.config() })
     }
 

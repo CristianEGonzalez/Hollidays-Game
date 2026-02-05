@@ -54,13 +54,56 @@ class PersonajeConDialogo inherits Interactuable {
     }
 }
 
-object gatito inherits PersonajeConDialogo(position = game.at(3, 1), dialogos = ["gatitodialogo1.png", "gatitodialogo.png"]) {}
+object gatito inherits PersonajeConDialogo(position = game.at(3, 1), dialogos = ["gatitodialogo1.png", "gatitodialogo.png"]) {
+    var property dormido = false
+    const dialogosDormido = ["dialogogatito.png", "dialogogatito2.png", "dialogogatito3.png"]
+    
+    method obtenerDialogosActuales() {
+        return if (dormido) 
+            dialogosDormido
+        else
+            dialogos
+    }
+    
+    override method accion() {
+        if (!game.hasVisual(pantallaDialogo)) {
+            const dialogosActuales = self.obtenerDialogosActuales()
+            pantallaDialogo.image(dialogosActuales.get(indice))
+            game.addVisual(pantallaDialogo)
+            self.avanzarDialogo()
+        }
+    }
+    
+    override method avanzarDialogo() {
+        const dialogosActuales = self.obtenerDialogosActuales()
+        indice = (indice + 1) % dialogosActuales.size()
+    }
+    
+    method dormir() {
+        dormido = true
+        indice = 0
+    }
+    
+    method despertar() {
+        dormido = false
+        indice = 0
+    }
+}
 
-object gatito2 inherits PersonajeConDialogo(position = game.at(3, 1), dialogos = ["dialogogatito.png", "dialogogatito2.png", "dialogogatito3.png"]) {}
-
-object ali inherits PersonajeConDialogo(position = game.at(1, 5), dialogos = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]) {}
-
-object ali2 inherits PersonajeConDialogo(position = game.at(2, 3), dialogos = ["dialogoalipanqueque.png"]) {}
+object ali inherits PersonajeConDialogo(position = game.at(1, 5), dialogos = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]) {
+    const dialogosHabitacionNormal = ["dialogoali.png", "dialogoali1.png", "dialogoali2.png", "dialogoali3.png", "dialogoali4.png"]
+    const dialogosDesayuno = ["dialogoalipanqueque.png"]
+    
+    method configurarHabitacionNormal() {
+        position = game.at(1, 5)
+        self.cambiarDialogos(dialogosHabitacionNormal)
+    }
+    
+    method configurarDesayuno() {
+        position = game.at(2, 3)
+        self.cambiarDialogos(dialogosDesayuno)
+    }
+}
 
 object pizarron inherits Interactuable(position = game.at(14, 8)) {
     var property pizarron = "pizarronzoom.png"
