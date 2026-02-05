@@ -23,7 +23,6 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
     var property progresoMezcla = 0
     var property selectorX = 0
     var property dirSelector = 1
-    const zonasExito = [2, 5, 8] // Tres puntos fijos para el espacio
     var property zonaObjetivoActual = 0
 
     // Variables Fase 3 (Cocción)
@@ -211,23 +210,31 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         fondoCocinaPanqueques.image("fondococina_" + (zonaObjetivoActual + 1).toString() + ".png")
     }
 
-    method limpiarPantallaMezcla() {
+    method limpiarPantalla(objetosEsenciales) {
         game.allVisuals().forEach({ v =>
-            if(v != marcadorGeneral and v != cris and v != cartelMensaje and v != fondoCocinaPanqueques) game.removeVisual(v)
-        })
-        if (!game.hasVisual(fondoCocinaPanqueques)) game.addVisual(fondoCocinaPanqueques)
-        game.addVisual(selectorMezcla)
-        if (!game.hasVisual(cris)) game.addVisual(cris)
-        if (!game.hasVisual(cartelMensaje)) game.addVisual(cartelMensaje)
-    }
-
-    method limpiarPantallaGeneral() {
-        game.allVisuals().forEach({ v =>
-            if(v != fondoCocinaPanqueques and v != marcadorGeneral and v != cartelMensaje) {
+            if (!objetosEsenciales.contains(v)) {
                 game.removeVisual(v)
             }
         })
+    }
+
+    method limpiarPantallaMezcla() {
+        self.limpiarPantalla([fondoCocinaPanqueques, marcadorGeneral, cartelMensaje, cris, selectorMezcla])
+    }
+
+    method limpiarPantallaGeneral() {
+        self.limpiarPantalla([fondoCocinaPanqueques, marcadorGeneral, cartelMensaje])
         if (game.hasVisual(cris)) game.removeVisual(cris)
+    }
+
+    method limpiarPantallaCoccion() {
+        self.limpiarPantalla([fondoCocinaPanqueques, marcadorGeneral, cartelMensaje])
+    }
+
+    method limpiarPantallaFinal() {
+        self.limpiarPantalla([marcadorGeneral, cris, cartelMensaje])
+        self.agregarFondo()
+        if (!game.hasVisual(cartelMensaje)) game.addVisual(cartelMensaje)
     }
 
     method moverSelector() {
@@ -284,14 +291,6 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         self.mostrarCartel("¡Cocina 12 panqueques!")
     }
 
-    method limpiarPantallaCoccion() {
-        game.allVisuals().forEach({ v =>
-            if(v != marcadorGeneral and v != cris and v != cartelMensaje and v != fondoCocinaPanqueques) game.removeVisual(v)
-        })
-        if (!game.hasVisual(fondoCocinaPanqueques)) game.addVisual(fondoCocinaPanqueques)
-        if (!game.hasVisual(cartelMensaje)) game.addVisual(cartelMensaje)
-    }
-
     method intentarSacar(indice) {
         if (faseActual == 3 and juegoActivo) {
             const s = sartenes.get(indice)
@@ -309,14 +308,6 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
                 if (tiempoRestante == 0) self.perder()
             }
         }
-    }
-
-    method limpiarPantalla() {
-        game.allVisuals().forEach({ v =>
-            if(v != marcadorGeneral and v != cris and v != cartelMensaje) game.removeVisual(v) 
-        })
-        self.agregarFondo()
-        if (!game.hasVisual(cartelMensaje)) game.addVisual(cartelMensaje)
     }
 
     method victoria() {
@@ -385,7 +376,7 @@ class Sarten {
     }
 
     method detener() {
-        try { game.removeTickEvent("cocinar_" + id.toString()) } catch e : Exception {}
+        try { game.removeTickEvent("cocinar_" + id.toString()) } catch e : Exception { return }
     }
 }
 
