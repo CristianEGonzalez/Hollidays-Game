@@ -1,4 +1,5 @@
 import niveles.*
+import objetos.*
 
 object cris {
   var property image = "cris.png"
@@ -23,8 +24,10 @@ object cris {
 
 class Mover {
   method move(newPosition) {
-    cris.previousPosition(cris.position())
-    cris.position(newPosition)
+    if (!game.hasVisual(pantallaDialogo)){
+      cris.previousPosition(cris.position())
+      cris.position(newPosition)
+    }
   }
   
   method config() {
