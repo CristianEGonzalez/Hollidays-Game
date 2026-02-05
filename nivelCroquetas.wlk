@@ -38,11 +38,8 @@ object minijuegoCroquetas inherits NivelBase {
         cris.image("crispetit.png")
 
         self.crearPlato(3)
-        self.crearPlatoInvisible(4)
         self.crearPlato(7)
-        self.crearPlatoInvisible(8)
         self.crearPlato(11)
-        self.crearPlatoInvisible(12)
 
         game.onTick(velocidadCris, "movimientoCris", { self.moverCris() })
         game.onTick(2500, "lanzarGato", { self.lanzarGato() })
@@ -70,12 +67,6 @@ object minijuegoCroquetas inherits NivelBase {
 
     method crearPlato(x) {
         const p = new Plato(position = game.at(x, 0))
-        platosActivos.add(p)
-        game.addVisual(p)
-    }
-
-    method crearPlatoInvisible(x) {
-        const p = new PlatoInvisible(position = game.at(x, 0))
         platosActivos.add(p)
         game.addVisual(p)
     }
@@ -216,6 +207,8 @@ class Croqueta {
     }
     else if (minijuegoCroquetas.platosActivos().any({ plato =>
         plato.position().x() == position.x() and
+        plato.position().y() == position.y() ||
+        plato.position().x()+1 == position.x() and
         plato.position().y() == position.y()
     })) {
         minijuegoCroquetas.sumar()
@@ -262,11 +255,6 @@ class GatoObstaculo {
 class Plato {
     var property position
     method image() = "platocroquetas.png"
-}
-
-class PlatoInvisible {
-    var property position
-    method image() = "transparente.png"
 }
 
 object marcadorPuntos {
