@@ -100,10 +100,8 @@ class NivelBase {
       }
     )
     
-    // Tecla E para interacciones
+    // Tecla E para interacciones (abre/cierra diálogos)
     keyboard.e().onPressDo({ self.procesarInteraccion() })
-
-    keyboard.b().onPressDo({ self.retroceder() })
   }
   
   method verificarColisiones() {
@@ -113,18 +111,22 @@ class NivelBase {
   }
   
   method procesarInteraccion() {
-    // Verificar portales
-    portales.forEach(
-      { portal => if (cris.estaEnPosicion(portal.posicion())) portal.accion() }
-    )
-    
-    // Verificar interactuables
-    interactuables.forEach(
-      { interactuable => if (cris.compartePosicion(
-                             interactuable
-                           ) && interactuable.puedeInteractuar())
-                           interactuable.accion() }
-    )
+    if (game.hasVisual(pantallaDialogo)) {
+      self.cerrarDialogo()
+    } else {
+      // Verificar portales
+      portales.forEach(
+        { portal => if (cris.estaEnPosicion(portal.posicion())) portal.accion() }
+      )
+      
+      // Verificar interactuables
+      interactuables.forEach(
+        { interactuable => if (cris.compartePosicion(
+                               interactuable
+                             ) && interactuable.puedeInteractuar())
+                             interactuable.accion() }
+      )
+    }
   }
   
   method agregarBloqueador(bloqueador) {

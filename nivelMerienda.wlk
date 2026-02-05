@@ -78,7 +78,7 @@ object minijuegoPanqueques inherits NivelComputadoraBase {
         keyboard.down().onPressDo({ if (faseActual == 1) moverAbajo.mover() })
         keyboard.left().onPressDo({ if (faseActual == 1) moverIzquierda.mover() })
         keyboard.right().onPressDo({ if (faseActual == 1) moverDerecha.mover() })
-        keyboard.b().onPressDo({ if (faseActual == 1) self.consultarReceta() })
+        keyboard.c().onPressDo({ if (faseActual == 1) self.consultarReceta() })
 
         keyboard.e().onPressDo({ if (faseActual == 1) self.procesarInteraccion() })
         keyboard.space().onPressDo({ if (faseActual == 2) self.batir() })
