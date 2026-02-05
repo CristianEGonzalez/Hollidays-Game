@@ -8,6 +8,8 @@ import nivelCroquetas.*
 import nivelMerienda.*
 import inicio.*
 import sonidos.*
+import fondos.*
+
 class NivelBase {
   var property bloqueadores = []
   var property portales = []
@@ -205,7 +207,7 @@ class NivelHabitacionBase inherits NivelBase {
 }
 
 object nivelHabitacion inherits NivelHabitacionBase {
-  override method agregarFondo() { game.addVisual(fondoHabitacion) }
+  override method agregarFondo() { game.addVisual(new Fondo(image="fondohabitacion.png")) }
   override method configurarPortales() {
     self.agregarPortalEn(game.at(0, 1), pantallaInstruccionCroquetas)
     self.agregarPortalEn(game.at(1, 1), pantallaInstruccionCroquetas)
@@ -213,7 +215,7 @@ object nivelHabitacion inherits NivelHabitacionBase {
 }
 
 object nivelHabitacionV2 inherits NivelHabitacionBase {
-  override method agregarFondo() { game.addVisual(fondoHabitacionV2) }
+  override method agregarFondo() { game.addVisual(new Fondo(image="fondohabitacionV2.png")) }
   override method configurarPortales() {
     self.agregarPortalEn(game.at(5, 8), nivelComputadora)
     self.agregarPortalEn(game.at(6, 8), nivelComputadora)
@@ -226,9 +228,12 @@ object nivelHabitacionV2 inherits NivelHabitacionBase {
 
 object nivelHabitacionV3 inherits NivelHabitacionBase {
   override method agregarFondo() {
-    game.addVisual(fondoHabitacionV2)
-    game.onTick(500, "animacionFondo", { fondoHabitacionV2.cambiarFotograma() })
+    const fondoV2 = new FondoAnimado(imagenes=["fondohabitacionV2_2.png", "fondohabitacionV2.png"], tick=500)
+    game.addVisual(fondoV2)
+    fondoV2.animar()
   }
+
+
   override method configurarPortales() {
     self.agregarPortalEn(game.at(14, 6), pantallaInstruccionMerienda)
   }
@@ -239,9 +244,10 @@ object nivelHabitacionV3 inherits NivelHabitacionBase {
 }
 
 object nivelHabitacionV4 inherits NivelBase {
-   override method agregarFondo() {
-    game.addVisual(fondowinpanqueque)
-    game.onTick(500, "animacionFondo", { fondowinpanqueque.cambiarFotograma() })
+  override method agregarFondo() {
+    const fondoPanques = new FondoAnimado(imagenes=["fondowinpanqueque1.png","fondowinpanqueque2.png"], tick=500)
+    game.addVisual(fondoPanques)
+    fondoPanques.animar()
   }
   override method configurarPortales() {
     self.agregarPortalEn(game.at(0, 0), nivelRuta)
@@ -274,20 +280,9 @@ object nivelHabitacionV4 inherits NivelBase {
     }
 }
 
-object fondowinpanqueque {
-  var property position = game.origin()
-  var fotograma = false
-
-  method image() = if (fotograma) "fondowinpanqueque.png" else "fondowinpanqueque2.png"
-
-  method cambiarFotograma() {
-    fotograma = !fotograma
-  }
-}
-
 object nivelRuta inherits NivelBase {
   override method agregarFondo() {
-    game.addVisual(fondoRuta)
+    game.addVisual(new Fondo(image="fondoruta.png"))
   }
   
   override method configurarPortales() {
@@ -320,27 +315,6 @@ object nivelRuta inherits NivelBase {
   override method musicaDeNivel() = "musica_fondo.mp3"
 }
 
-object fondoRuta {
-  var property image = "fondoruta.png"
-  var property position = game.origin()
-}
-
-object fondoHabitacion {
-  var property image = "fondohabitacion.png"
-  var property position = game.origin()
-}
-
-object fondoHabitacionV2 {
-  var property position = game.origin()
-  var fotograma = false
-
-  method image() = if (fotograma) "fondohabitacionV2_2.png" else "fondohabitacionV2.png"
-
-  method cambiarFotograma() {
-    fotograma = !fotograma
-  }
-}
-
 class NivelComputadoraBase inherits NivelBase {
   var property filaSuperiorBloqueada = 3
   
@@ -358,7 +332,7 @@ class NivelComputadoraBase inherits NivelBase {
 
 object nivelComputadora inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(fondoComputadora)
+    game.addVisual(new Fondo(image="compufondo.png"))
   }
   
   override method configurarPortales() {
@@ -366,14 +340,10 @@ object nivelComputadora inherits NivelComputadoraBase {
   }
 }
 
-object fondoComputadora {
-  var property image = "compufondo.png"
-  var property position = game.origin()
-}
 
 object nivelComputadoraV2 inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(fondoComputadora)
+    game.addVisual(new Fondo(image="compufondo.png"))
   }
   
   override method configurarPortales() {
@@ -383,7 +353,7 @@ object nivelComputadoraV2 inherits NivelComputadoraBase {
 
 object nivelComputadoraV3 inherits NivelComputadoraBase {
     override method agregarFondo() {
-        game.addVisual(fondoComputadora3)
+        game.addVisual(new Fondo(image="fondocompusalida.png"))
     }
 
     override method configurarPortales() {
@@ -393,9 +363,4 @@ object nivelComputadoraV3 inherits NivelComputadoraBase {
         // Portal de salida a la Habitación
         self.agregarPortalEn(game.at(14, 13), nivelHabitacionV3)
     }
-}
-
-object fondoComputadora3 {
-    var property image = "fondocompusalida.png"
-    var property position = game.origin()
 }
