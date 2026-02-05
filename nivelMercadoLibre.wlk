@@ -21,7 +21,7 @@ object nivelMercadoLibre inherits NivelComputadoraBase {
 
 object nivelMercadoLibre2 inherits NivelComputadoraBase {
   override method agregarFondo() {
-    game.addVisual(new Fondo(image="mercadolibre1.png"))
+    game.addVisual(new Fondo(image="mercadolibre2.png"))
   }
   
   override method configurarPortales() {
@@ -122,6 +122,7 @@ class NivelCaptchaBase inherits NivelComputadoraBase {
       const movValido = thinIceSystem.moverPersonaje(cris.position(), nuevaPos)
       if (movValido) {
         cris.position(nuevaPos)
+        if (thinIceSystem.juegoTerminado()) siguienteNivel.config()
       } else if (thinIceSystem.personajePerdio()) {
         self.reiniciarNivel()
       }
