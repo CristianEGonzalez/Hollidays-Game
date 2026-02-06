@@ -107,7 +107,7 @@ object ali inherits PersonajeConDialogo(position = game.at(1, 5), dialogos = ["d
         posicionesInteractuables = [self.position(), game.at(2,5), game.at(3,6)]
     }
     
-    method configurarDesayuno() {
+    method configurarMerienda() {
         position = game.at(2, 3)
         self.cambiarDialogos(dialogosMerienda)
         posicionesInteractuables = [self.position(), game.at(3,3)]

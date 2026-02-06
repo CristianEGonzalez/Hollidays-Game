@@ -265,7 +265,7 @@ object nivelHabitacionV4 inherits NivelBase {
     }
 
   override method configurarInteractuables() {
-    ali.configurarDesayuno()
+    ali.configurarMerienda()
     self.agregarInteractuable(ali)
   }
 
