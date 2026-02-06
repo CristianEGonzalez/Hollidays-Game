@@ -6,7 +6,7 @@ import nivelMercadoLibre.*
 import nivelTerraria.*
 import nivelCroquetas.*
 import nivelMerienda.*
-import inicio.*
+import pantallas.*
 import sonidos.*
 import fondos.*
 
@@ -17,6 +17,10 @@ class NivelBase {
   
   method config() {
     game.clear()
+    
+    bloqueadores = []
+    portales = []
+    interactuables = []
     
     self.agregarFondo()
     self.agregarElementos()
@@ -209,8 +213,8 @@ class NivelHabitacionBase inherits NivelBase {
 object nivelHabitacion inherits NivelHabitacionBase {
   override method agregarFondo() { game.addVisual(new Fondo(image="fondohabitacion.png")) }
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(0, 1), pantallaInstruccionCroquetas)
-    self.agregarPortalEn(game.at(1, 1), pantallaInstruccionCroquetas)
+    self.agregarPortalEn(game.at(0, 1), pantallas.instruccionCroquetas())
+    self.agregarPortalEn(game.at(1, 1), pantallas.instruccionCroquetas())
   }
 }
 
@@ -235,7 +239,7 @@ object nivelHabitacionV3 inherits NivelHabitacionBase {
 
 
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(14, 6), pantallaInstruccionMerienda)
+    self.agregarPortalEn(game.at(14, 6), pantallas.instruccionMerienda())
   }
   override method configurarInteractuables() {
     super()
@@ -286,17 +290,17 @@ object nivelRuta inherits NivelBase {
   }
   
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(14, 3), pantallaFin)
-    self.agregarPortalEn(game.at(14, 4), pantallaFin)
-    self.agregarPortalEn(game.at(14, 5), pantallaFin)
-    self.agregarPortalEn(game.at(14, 6), pantallaFin)
-    self.agregarPortalEn(game.at(14, 7), pantallaFin)
+    self.agregarPortalEn(game.at(14, 3), pantallas.fin())
+    self.agregarPortalEn(game.at(14, 4), pantallas.fin())
+    self.agregarPortalEn(game.at(14, 5), pantallas.fin())
+    self.agregarPortalEn(game.at(14, 6), pantallas.fin())
+    self.agregarPortalEn(game.at(14, 7), pantallas.fin())
 
-    self.agregarPortalEn(game.at(15, 3), pantallaFin)
-    self.agregarPortalEn(game.at(15, 4), pantallaFin)
-    self.agregarPortalEn(game.at(15, 5), pantallaFin)
-    self.agregarPortalEn(game.at(15, 6), pantallaFin)
-    self.agregarPortalEn(game.at(15, 7), pantallaFin)
+    self.agregarPortalEn(game.at(15, 3), pantallas.fin())
+    self.agregarPortalEn(game.at(15, 4), pantallas.fin())
+    self.agregarPortalEn(game.at(15, 5), pantallas.fin())
+    self.agregarPortalEn(game.at(15, 6), pantallas.fin())
+    self.agregarPortalEn(game.at(15, 7), pantallas.fin())
 
   }
 
@@ -347,7 +351,7 @@ object nivelComputadoraV2 inherits NivelComputadoraBase {
   }
   
   override method configurarPortales() {
-    self.agregarPortalEn(game.at(1, 9), pantallaInstruccionVS)
+    self.agregarPortalEn(game.at(1, 9), pantallas.instruccionVS())
   }
 }
 
@@ -358,7 +362,7 @@ object nivelComputadoraV3 inherits NivelComputadoraBase {
 
     override method configurarPortales() {
         // Portal a Terraria
-        self.agregarPortalEn(game.at(1, 7), pantallaInstruccionTerraria)
+        self.agregarPortalEn(game.at(1, 7), pantallas.instruccionTerraria())
         
         // Portal de salida a la Habitación
         self.agregarPortalEn(game.at(14, 13), nivelHabitacionV3)

@@ -4,9 +4,9 @@ class Fondo{
 }
 
 class FondoAnimado inherits Fondo{
-  const imagenes = []
+  var property imagenes = []
   const tick = 100
-  var fotograma = 0
+  var property fotograma = 0
 
   override method image() = imagenes.get(fotograma)
 

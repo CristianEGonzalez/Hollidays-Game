@@ -102,9 +102,9 @@ object nivelTerraria inherits NivelComputadoraBase {
     }
 
     method detenerEventos() {
-        // Removemos todos los eventos posibles por nombre
+        // Removemos todos los eventos posibles por nombre (ignorando errores si no existen)
         const eventos = ["disparoBoss", "movimientoBoss", "azarEmbestida", "cuentaRegresiva"]
-        eventos.forEach({ e => try { game.removeTickEvent(e) } catch ex : Exception {} })
+        eventos.forEach({ e => try { game.removeTickEvent(e) } catch ex : Exception { return } })
     }
 
     method victoria() {
@@ -147,7 +147,7 @@ object ojoBoss {
         if (position.x() >= 15) direccionX = -1
         if (position.x() <= 0) direccionX = 1
         
-        var nuevaX = position.x() + direccionX
+        const nuevaX = position.x() + direccionX
         var nuevaY = position.y()
 
         // 2. Lógica de Fases

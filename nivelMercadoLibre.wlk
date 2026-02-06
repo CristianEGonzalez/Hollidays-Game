@@ -1,4 +1,4 @@
-import inicio.*
+import pantallas.*
 import niveles.*
 import personajes.*
 import objetos.*
@@ -12,8 +12,8 @@ object nivelMercadoLibre inherits NivelComputadoraBase {
   
   override method configurarPortales() {
     // Portales para el minijuego captcha
-    self.agregarPortalEn(game.at(4, 7), pantallaInstruccionMercado)
-    self.agregarPortalEn(game.at(5, 7), pantallaInstruccionMercado)
+    self.agregarPortalEn(game.at(4, 7), pantallas.instruccionMercado())
+    self.agregarPortalEn(game.at(5, 7), pantallas.instruccionMercado())
   }
 
   override method musicaDeNivel() = "musica_fondo_habitacion.mp3"
@@ -169,7 +169,7 @@ object nivelCaptcha2 inherits NivelCaptchaBase(
 object nivelCaptcha3 inherits NivelCaptchaBase(
   fondo = nivelCaptchaFondo3,
   posInicio = game.at(0, 9),
-  siguienteNivel = pantallaCaptchaSuperado,
+  siguienteNivel = pantallas.captchaSuperado(),
   thinIceSystem = new ThinIceSystem(posicionMeta = game.at(12, 12), posicionInicial = posInicio),
   areaJuego = [
     [7, [5, 6, 7]], [8, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]],
