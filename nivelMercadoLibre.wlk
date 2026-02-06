@@ -142,7 +142,7 @@ class NivelCaptchaBase inherits NivelComputadoraBase {
 }
 
 object nivelCaptcha1 inherits NivelCaptchaBase(
-  fondo = nivelCaptchaFondo1,
+  fondo = new Fondo(image="nivel1ice.png"),
   posInicio = game.at(2, 7),
   siguienteNivel = nivelMercadoLibre2,
   thinIceSystem = new ThinIceSystem(posicionMeta = game.at(13, 7), posicionInicial = posInicio),
@@ -154,7 +154,7 @@ object nivelCaptcha1 inherits NivelCaptchaBase(
 ) {}
 
 object nivelCaptcha2 inherits NivelCaptchaBase(
-  fondo = nivelCaptchaFondo2,
+  fondo = new Fondo(image="nivel2ice.png"),
   posInicio = game.at(12, 12),
   siguienteNivel = nivelMercadoLibre3,
   thinIceSystem = new ThinIceSystem(posicionMeta = game.at(0, 9), posicionInicial = posInicio),
@@ -167,7 +167,7 @@ object nivelCaptcha2 inherits NivelCaptchaBase(
 ) {}
 
 object nivelCaptcha3 inherits NivelCaptchaBase(
-  fondo = nivelCaptchaFondo3,
+  fondo = new Fondo(image="nivel3ice.png"),
   posInicio = game.at(0, 9),
   siguienteNivel = pantallas.captchaSuperado(),
   thinIceSystem = new ThinIceSystem(posicionMeta = game.at(12, 12), posicionInicial = posInicio),
@@ -177,21 +177,3 @@ object nivelCaptcha3 inherits NivelCaptchaBase(
     [10, [3, 4, 5, 7, 8, 9, 10, 12, 13, 14]], [11, [12]], [12, [12]]
   ]
 ) {}
-
-object nivelCaptchaFondo1 {
-  var property image = "nivel1ice.png"
-  var property position = game.origin()
-  method esBloqueador() = false
-}
-
-object nivelCaptchaFondo2 {
-  var property image = "nivel2ice.png"
-  var property position = game.origin()
-  method esBloqueador() = false
-}
-
-object nivelCaptchaFondo3 {
-  var property image = "nivel3ice.png"
-  var property position = game.origin()
-  method esBloqueador() = false
-}
